@@ -1,6 +1,7 @@
 package com.webstore.service.impl;
 
 import com.webstore.domain.User;
+import com.webstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
