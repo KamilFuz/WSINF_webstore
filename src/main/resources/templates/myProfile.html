@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head th:replace="common/header :: common-header"/>
+
+<body>
+
+<div th:replace="common/header :: navbar"/>
+
+<!-- Main component for a primary marketing message or call to action -->
+<div class="container">
+    <div class="row" style="margin-bottom: -100px;">
+        <div class="col-xs-8">
+            <h2 class="section-headline">
+                <h2 class="section-headline"><span th:text="${#strings.toUpperCase{user.username} }"></span></h2>
+            </h2>
+        </div>
+        <div class="col-xs-4">
+            <img src="/image/logo.png" class="img-responsive" style="margin-bottom: -150px;"/>
+        </div>
+    </div>
+    <hr style="position:absolute; width:100%; height:6px; background-color: #333; z-index:-1; margin-top: -60px;"/>
+    <!--<div class="col-xs-8">-->
+    <img class="img-responsive" src="/image/wood.png" style="margin-top: -65px; margin-bottom: 25px;"/>
+    <!--</div>-->
+    <!--<div class="col-xs-4"></div>-->
+    <div class="row" style="margin-top: 120px;">
+        <div class="col-xs-9 col-xs-offset-3">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1" data-toggle="tab"><span style="color:red;">Edycja konta</span></a></li>
+                <li th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2" data-toggle="tab"><span style="color:red;">Zamówienia</span></a></li>
+                <li th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3" data-toggle="tab"><span style="color:red;">Billingi</span></a></li>
+                <li th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4" data-toggle="tab"><span style="color:red;">Dostawa zamówienia</span></a></li>
+            </ul>
+
+            <!-- Tab panels -->
+            <div class="tab-content">
+
+                <!-- edit user information -->
+                <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveEdit}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+                                <form th:action="@{/updateUserInfo}" method="post">
+// UWAGA MOŻLIWY ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    <input type="hidden" name="id" th:value="${user.id}">
+
+                                    <div class="bg-info" th:if="${updateUserInfo}">User info updated.</div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="firstName">First Name</label>
+                                                <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}"/>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="lastName">Last Name</label>
+                                                <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="userName">User Name</label>
+                                        <input type="text" class="form-control" id="userName" name="userName" th:value="${user.userName}"/>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="currentPassword">Obecna hasło</label>
+                                        <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}"/>
+                                    </div>
+
+                                    <p style="color: #828282">Wpisz swoje obecne hasło jeśli chcesz zmienić hasło lub mail</p>
+
+                                    <div class="form-group">
+                                        <label for="email">Obecny adres mailowy</label>
+                                        <input type="text" class="form-control" id="email" name="email" th:value="${user.email}"/>
+                                    </div>
+
+                                    <p style="color: #828282">Wprowadź adres mailowy. Ten adres mailowy jest
+                                        przypisany wyłącznie do twojego konta. Nie zostanie użyty do przeprowadzania
+                                        ankiet czy reklam. Podany mail jest wykorzystywany tylko do realizacji
+                                        zamówienia!</p>
+
+                                    <div class="form-group">
+                                        <label for="txtNewPassword">Hasło</label>
+                                        <input type="text" class="form-control" id="txtNewPassword" name="newPassword" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txtConfirmPassword">Powtórz hasło</label>
+                                        <input type="text" class="form-control" id="txtConfirmPassword" />
+                                    </div>
+
+                                    <p style="color: #828282">W celu zmiany hasła, proszę wpisać dwa razy to samo hasło.</p>
+
+                                    <button type="submit" class="btn btn-primary">Utwórz konto</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- log in -->
+                <div class="tab-pane fade" id="tab-2" th:classappend="${classActiveLogin}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="newUsername">* Nazwa użytkownika</label>
+                                        <input required="required" type="text" class="form-control" id="newUsername"
+                                               name="username"/>
+                                        <p style="color:#828282">Wprowadź nazwę użytkownka</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">* Hasło</label>
+                                        <input required="required" type="password" class="form-control"
+                                               id="password" name="password"/>
+                                        <p style="color:#828282">Wprowadź hasło do konta.</p>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Zaloguj</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- forget password -->
+                <div class="tab-pane fade" id="tab-3" th:classappend="${classActiveForgotPassword}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recoverEmail">* Email</label>
+                                        <input required="required" type="text" class="form-control"
+                                               id="recoverEmail" name="email"/>
+                                        <p style="color:#828282">Podaj adres mailowy przypisany do konta.</p>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Przypomnij hasło</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container -->
+
+        <div th:replace="common/footer :: footer"/>
+</body>
+</html>
