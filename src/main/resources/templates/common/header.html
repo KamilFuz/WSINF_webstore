@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="common-header">
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -58,8 +58,9 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#">KOSZYK</a></li>
-                    <li><a th:href="@{/Login}">MOJE KONTO</a></li>
-                    <li><a href="#">WYLOGUJ</a></li>
+                    <li><a sec:authorize="isAnonymous()" th:href="@{/login}">MOJE KONTO</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">MOJE KONTO</a></li>
+                    <li><a sec:authorize="isAuthenticated()" href="@{/logout}">WYLOGUJ</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

@@ -104,55 +104,9 @@
                     </div>
                 </div>
 
-                <!-- log in -->
-                <div class="tab-pane fade" id="tab-2" th:classappend="${classActiveLogin}? 'in active'">
-                    <div class="panel-group">
-                        <div class="panel panel-default" style="border: none;">
-                            <div class="panel-body"
-                                 style="background-color: #ededed; margin-top: 20px;">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="newUsername">* Nazwa użytkownika</label>
-                                        <input required="required" type="text" class="form-control" id="newUsername"
-                                               name="username"/>
-                                        <p style="color:#828282">Wprowadź nazwę użytkownka</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">* Hasło</label>
-                                        <input required="required" type="password" class="form-control"
-                                               id="password" name="password"/>
-                                        <p style="color:#828282">Wprowadź hasło do konta.</p>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Zaloguj</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- forget password -->
-                <div class="tab-pane fade" id="tab-3" th:classappend="${classActiveForgotPassword}? 'in active'">
-                    <div class="panel-group">
-                        <div class="panel panel-default" style="border: none;">
-                            <div class="panel-body"
-                                 style="background-color: #ededed; margin-top: 20px;">
-                                <form>
-                                    <div class="form-group">
-                                        <label for="recoverEmail">* Email</label>
-                                        <input required="required" type="text" class="form-control"
-                                               id="recoverEmail" name="email"/>
-                                        <p style="color:#828282">Podaj adres mailowy przypisany do konta.</p>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary">Przypomnij hasło</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-        </div> <!-- /container -->
+        </div>
+        <!-- /container -->
 
         <div th:replace="common/footer :: footer"/>
 </body>
