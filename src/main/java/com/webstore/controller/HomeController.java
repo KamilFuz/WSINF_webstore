@@ -6,8 +6,11 @@ import com.webstore.domain.security.Role;
 import com.webstore.domain.security.UserRole;
 import com.webstore.service.impl.UserSecurityService;
 import com.webstore.service.impl.UserService;
+import com.webstore.utility.MailConstructor;
 import com.webstore.utility.SecurityUtility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 
 @Controller
 public class HomeController {
@@ -32,6 +36,12 @@ public class HomeController {
 
     @Autowired
     private UserSecurityService userSecurityService;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private MailConstructor mailConstructor;
 
     @RequestMapping("/")
     public String index() {
@@ -98,9 +108,18 @@ public class HomeController {
         userRoles.add(new UserRole(user, role));
         userService.createUser(user, userRoles);
 
-    }
-    ) {
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokenForUser(user, token);
 
+        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+        SimpleMailMessage email = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+
+        mailSender.send(email);
+
+        model.addAttribute("emailSent", true);
+
+        return "myAccount";
     }
 
     @RequestMapping("/newUser")

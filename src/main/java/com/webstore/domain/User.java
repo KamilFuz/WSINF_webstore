@@ -30,7 +30,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<UserRole> userRole = new HashSet<>();
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -66,7 +66,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
-        userRole.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
+        userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
 
         return authorities;
     }
@@ -120,11 +120,11 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public Set<UserRole> getUserRole() {
-        return userRole;
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
     }
 
-    public void setUserRole(Set<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 }
