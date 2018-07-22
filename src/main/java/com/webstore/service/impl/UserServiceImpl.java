@@ -6,6 +6,9 @@ import com.webstore.domain.security.UserRole;
 import com.webstore.repository.PasswordResetTokenRepository;
 import com.webstore.repository.RoleRepository;
 import com.webstore.repository.UserRepository;
+import com.webstore.service.impl.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +16,8 @@ import java.util.Set;
 
 @Service
 public class UserServiceImpl implements com.webstore.service.impl.UserService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -47,7 +52,7 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
         User localUser = userRepository.findByUsername(user.getUsername());
 
         if (localUser != null) {
-            throw new Exception("Użytkownik istnieje, nic nie zostanie wykonane");
+            LOG.info("Użytkownik {} istnieje, nic nie zostanie wykonane", user.getUsername());
         } else {
             for (UserRole ur : userRoles) {
                 roleRepository.save(ur.getRole());

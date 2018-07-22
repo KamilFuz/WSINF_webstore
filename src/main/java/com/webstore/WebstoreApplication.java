@@ -26,7 +26,7 @@ public class WebstoreApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         User user1 = new User();
-        user1.setFirstName("j");
+        user1.setFirstName("John");
         user1.setLastName("Adams");
         user1.setUsername("j");
         user1.setPassword(SecurityUtility.passwordEncoder().encode("p"));

@@ -41,7 +41,10 @@
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
-                                <form>
+                                <div class="alert alert-info" th:if="${emailSent}">
+                                    Email z dalszymi instrukcjami został właśnie wysłany. Sprawdź swoją skrzynkę mailową.
+                                </div>
+                                <form th:action="@{/newUser}" method="post">
                                     <div class="form-group">
                                         <label for="newUsername">* Nazwa użytkownika</label>
                                         <input required="required" type="text" class="form-control" id="newUsername"
