@@ -1,0 +1,65 @@
+[33mcommit c00c8c2cb6140c715660821646c76fa183e5894a[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sun Jul 22 14:07:54 2018 +0200
+
+    Create New User Trouble Shooting
+
+[33mcommit 7903a3bd95b5810caee60e6294eba5aa15f0b54f[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sat Jul 21 23:51:29 2018 +0200
+
+    Adding Create User Logic
+
+[33mcommit 2278acfcaf99fc3a59c17c9582d1dc86be01863f[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sat Jul 21 23:03:22 2018 +0200
+
+    Adding New User Controller
+
+[33mcommit 8cce4e5e8d663d545e16527eae37726024b8a6da[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sat Jul 21 12:53:45 2018 +0200
+
+    Adding MyProfile Page
+
+[33mcommit 39190ea03518c690817c299110f76a9f910ea19b[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Thu Jul 19 00:30:04 2018 +0200
+
+    Adding PasswordResetToken and UserService
+
+[33mcommit df10d6e6153f4aea536942999027d50cb15208ec[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Wed Jul 18 23:36:57 2018 +0200
+
+    Adding more to login
+
+[33mcommit 7edf71aee3a7826a17ad1ae5ae808e31ee4fc670[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sun Jun 24 12:43:12 2018 +0200
+
+    Adding Security and Security Entities
+
+[33mcommit 0be2a60ba40f98f5f215c9224c53c9b414efc6fa[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Sat Jun 23 01:18:50 2018 +0200
+
+    Adding Security and Security Entities
+
+[33mcommit e3e1a1356aaaf9457d94804af0bdcdc81c1af9fc[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Thu Jun 14 00:08:44 2018 +0200
+
+    Adding User Entity, JPA, Hibernate and MySQL
+
+[33mcommit cda1fa1bed5437c1db0a9332cb280d7f04694a9c[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Wed Jun 13 23:05:19 2018 +0200
+
+    Add tabs in myaccount
+
+[33mcommit 24b50225b12b2be3663466764d3e80c3f0e967c9[m[33m ([m[1;32mmyaccount[m[33m)[m
+Author: Kamil Fuz <fuzkamil1993@gmail.com>
+Date:   Wed Jun 13 23:00:10 2018 +0200
+
+    Initial project version

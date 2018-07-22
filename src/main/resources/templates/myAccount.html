@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pl" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 
 <head th:replace="common/header :: common-header"/>
 
@@ -35,7 +35,7 @@
             <!-- Tab panels -->
             <div class="tab-content">
 
-                <!-- create new user pane -->
+                <!-- create new user panel -->
                 <div class="tab-pane fade" id="tab-1" th:classappend="${classActiveNewAccount}? 'in active'">
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
@@ -46,13 +46,13 @@
                                 </div>
                                 <form th:action="@{/newUser}" method="post">
                                     <div class="form-group">
-                                        <label for="newUsername">* Nazwa użytkownika</label>
+                                        <label for="newUsername">* Nazwa użytkownika</label></br><span style="color: red" th:if="${usernameExists}">Użytkownik o takiej nazwie istnieje.</span>
                                         <input required="required" type="text" class="form-control" id="newUsername"
                                                name="username"/>
                                         <p style="color:#828282">Wprowadź nazwę użytkownka</p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">* Email</label>
+                                        <label for="email">* Email</label></br><span style="color: red" th:if="${emailExists}">Email o takiej nazwie istnieje.</span>
                                         <input required="required" type="text" class="form-control" id="email"
                                                name="email"/>
                                         <p style="color:#828282">Wprowadź adres mailowy. Ten adres mailowy jest
@@ -68,13 +68,14 @@
                     </div>
                 </div>
 
-                <!-- log in -->
+                <!-- log in panel -->
                 <div class="tab-pane fade" id="tab-2" th:classappend="${classActiveLogin}? 'in active'">
                     <div class="panel-group">
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
-                                <form>
+                                <div th:if="${param.error != null}" style="color: red">Niepoprawna nazwa użytkownika lub hasło!</div>
+                                <form th:action="@{/login}" method="post">
                                     <div class="form-group">
                                         <label for="newUsername">* Nazwa użytkownika</label>
                                         <input required="required" type="text" class="form-control" id="newUsername"
@@ -101,7 +102,9 @@
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
-                                <form>
+                                <div th:if="${emailNotExists}" class="alert alert-danger">Podany email nie istnieje w bazie użytkowników.</div>
+                                <div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email z nowym hasłem został wysłany.</div>
+                                <form th:action="@{/forgetPassword}" method="post">
                                     <div class="form-group">
                                         <label for="recoverEmail">* Email</label>
                                         <input required="required" type="text" class="form-control"

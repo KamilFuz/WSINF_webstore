@@ -60,7 +60,7 @@
                     <li><a href="#">KOSZYK</a></li>
                     <li><a sec:authorize="isAnonymous()" th:href="@{/login}">MOJE KONTO</a></li>
                     <li><a sec:authorize="isAuthenticated()" th:href="@{/myProfile}">MOJE KONTO</a></li>
-                    <li><a sec:authorize="isAuthenticated()" href="@{/logout}">WYLOGUJ</a></li>
+                    <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}">WYLOGUJ</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->

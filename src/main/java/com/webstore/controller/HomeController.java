@@ -61,11 +61,41 @@ public class HomeController {
 
     @RequestMapping("/forgetPassword")
     public String forgetPassword (
+            HttpServletRequest request,
+            @ModelAttribute("email") String email,
+//            @ModelAttribute("username") String username,
 //            Locale locale,
 //            @RequestParam("token") String token,
             Model model) {
 //        PasswordResetToken passToken = userService.getPasswordResetToken(token);
         model.addAttribute("classActiveForgetPassword", true);
+
+        User user = userService.findByEmail(email);
+
+        if (user == null) {
+            model.addAttribute("emailNotExists", true);
+
+            return "myAccount";
+        }
+
+        String password = SecurityUtility.randomPassword();
+
+        String encryptedPassword = SecurityUtility.passwordEncoder().encode(password);
+        user.setPassword(encryptedPassword);
+
+        userService.save(user);
+
+        String token = UUID.randomUUID().toString();
+        userService.createPasswordResetTokenForUser(user, token);
+
+        String appUrl = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+        SimpleMailMessage newEmail = mailConstructor.constructResetTokenEmail(appUrl, request.getLocale(), token, user, password);
+
+        mailSender.send(newEmail);
+
+        model.addAttribute("forgetPasswordEmailSent", true);
+
         return "myAccount";
     }
 
@@ -87,7 +117,7 @@ public class HomeController {
         }
 
         if (userService.findByEmail(userEmail) != null) {
-            model.addAttribute("email", true);
+            model.addAttribute("emailExists", true);
 
             return "myAccount";
         }
