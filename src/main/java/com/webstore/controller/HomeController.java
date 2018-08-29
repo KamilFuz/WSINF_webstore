@@ -1,9 +1,11 @@
 package com.webstore.controller;
 
+import com.webstore.domain.Product;
 import com.webstore.domain.User;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.Role;
 import com.webstore.domain.security.UserRole;
+import com.webstore.service.ProductService;
 import com.webstore.service.impl.UserSecurityService;
 import com.webstore.service.impl.UserService;
 import com.webstore.utility.MailConstructor;
@@ -23,10 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 public class HomeController {
@@ -43,6 +42,9 @@ public class HomeController {
     @Autowired
     private MailConstructor mailConstructor;
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping("/")
     public String index() {
         return "index";
@@ -57,6 +59,13 @@ public class HomeController {
     public String login(Model model) {
         model.addAttribute("classActiveLogin", true);
         return "myAccount";
+    }
+
+    @RequestMapping("/storage")
+    public String storage(Model model){
+        List<Product> productList = productService.findAll();
+        model.addAttribute("productList", productList);
+        return "storage";
     }
 
     @RequestMapping("/forgetPassword")
@@ -151,6 +160,11 @@ public class HomeController {
 
         return "myAccount";
     }
+
+//    @RequestMapping("/myProfile")
+//    public String myProfile(Model model){
+//        return "index";
+//    }
 
     @RequestMapping("/newUser")
     public String newUser (
