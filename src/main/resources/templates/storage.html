@@ -43,9 +43,11 @@
                             <div class="row">
                                 <div class="col-xs-3">
                                     <!--<img class="img-responsive storage-product" th:src="#{adminPath}+@{/image/product}+${product.id}+'.png"/>-->
+                                    <img class="img-responsive storage-product" th:src="@{/image/product/}+${product.id}+'.png'"/>
                                 </div>
                                 <div class="col-xs-9">
-                                    <h4 th:text="product.name"></h4>
+                                    <h4 th:text="${product.name}"></h4>
+                                    <span>Numer produktu <span th:text="${product.id}"></span></span><br>
                                     <span th:text="${product.producer}"></span>
                                     <span style="font-size: x-large; color:#db3208;">ZŁ<span th:text="${#numbers.formatDecimal(product.ourPrice,0,'COMMA',2,'POINT')}"></span></span>
                                     <span style="text-decoration: line-through;">ZŁ<span th:text="${#numbers.formatDecimal(product.listPrice,0,'COMMA',2,'POINT')}"></span></span>
