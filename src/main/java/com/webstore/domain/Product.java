@@ -19,6 +19,15 @@ public class Product {
 
     private double listPrice;
     private double ourPrice;
+    private double shippingWeight;
+
+    public double getShippingWeight() {
+        return shippingWeight;
+    }
+
+    public void setShippingWeight(double shippingWeight) {
+        this.shippingWeight = shippingWeight;
+    }
 
     private boolean active=true;
     private int inStockNumber;
