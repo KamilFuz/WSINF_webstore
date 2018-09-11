@@ -2,6 +2,7 @@ package com.webstore.controller;
 
 import com.webstore.domain.Product;
 import com.webstore.domain.User;
+import com.webstore.domain.UserShipping;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.Role;
 import com.webstore.domain.security.UserRole;
@@ -10,6 +11,7 @@ import com.webstore.service.impl.UserSecurityService;
 import com.webstore.service.impl.UserService;
 import com.webstore.utility.MailConstructor;
 import com.webstore.utility.SecurityUtility;
+import com.webstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -167,17 +169,18 @@ public class HomeController {
     public String myProfile(Model model, Principal principal){
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
-//        model.addAttribute("userPaymentList", user.getUserPaymentList());
-//        model.addAttribute("userShippingList", user.getShippingPaymentList());
+        model.addAttribute("userPaymentList", user.getUserPaymentList());
+        model.addAttribute("userShippingList", user.getUserShippingList());
 //        model.addAttribute("orderList", user.getOrderList());
-//        UserShipping userShipping = new UserShipping();
+
+        UserShipping userShipping = new UserShipping();
         model.addAttribute("userShipping", userShipping);
 
         model.addAttribute("listOfCreditCards", true);
         model.addAttribute("listOfShippingAddress", true);
 
-        List<String> stateList = USConstants.listOfUSStateCode;
-        Collection.sort(stateList);
+        List<String> stateList = USConstants.listOfUSStatesCode;
+        Collections.sort(stateList);
         model.addAttribute("stateList", stateList);
         model.addAttribute("classActiveEdit", true);
 
