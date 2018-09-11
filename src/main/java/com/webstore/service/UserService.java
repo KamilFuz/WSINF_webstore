@@ -1,6 +1,8 @@
 package com.webstore.service.impl;
 
 import com.webstore.domain.User;
+import com.webstore.domain.UserBilling;
+import com.webstore.domain.UserPayment;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 
@@ -18,4 +20,6 @@ public interface UserService {
     User createUser(User user, Set<UserRole> userRoles) throws Exception;
 
     User save(User user);
+
+    void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
 }

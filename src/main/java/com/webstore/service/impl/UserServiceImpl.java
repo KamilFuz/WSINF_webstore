@@ -1,12 +1,13 @@
 package com.webstore.service.impl;
 
 import com.webstore.domain.User;
+import com.webstore.domain.UserBilling;
+import com.webstore.domain.UserPayment;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 import com.webstore.repository.PasswordResetTokenRepository;
 import com.webstore.repository.RoleRepository;
 import com.webstore.repository.UserRepository;
-import com.webstore.service.impl.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements com.webstore.service.impl.UserService {
 
-    private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOG = LoggerFactory.getLogger(com.webstore.service.impl.UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -70,5 +71,15 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
     @Override
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user) {
+        userPayment.setUser(user);
+        userPayment.setUserBilling(userBilling);
+        userPayment.setDefaultPayment(true);
+        userBilling.setUserPayment(userPayment);
+        user.getUserPaymentList().add(userPayment);
+        save(user);
     }
 }
