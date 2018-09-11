@@ -171,6 +171,118 @@
                                         <button class="btn btn-primary" type="submit">Zapisz</button>
                                     </form>
                                 </div>
+
+                                <div th:if="${addNewCreditCard}">
+                                    <form th:action="@{addNewCreditCard}" method="post">
+                                        <div class="bg-info" th:if="${updateUserPaymentInfo}">Informacje zaktualizowano.</div>
+
+                                        <input hidden="hidden" name="id" th:value="${userPayment.id}">
+
+                                        <div class="form-group">
+                                            <h5>* Proszę podać dane karty kredytowej:</h5>
+                                            <input type="text" class="form-control" id="cardName"
+                                                   placeHolder="Nazwa karty" th:name="cardName"
+                                                   required="required" th:value="${userPayment.cardName}" />
+                                        </div>
+
+                                        <!-- Billing Address -->
+                                        <hr />
+                                        <div class="form-group">
+                                            <h4>Dane do dokumentu sprzedaży</h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="billingName">* Nazwa</label> <input type="text"
+                                                                                           class="form-control" id="billingName"
+                                                                                           placeHoder="Nazwa do dokumentu sprzedaży" th:name="userBillingName"
+                                                                                           required="required"
+                                                                                           th:value="${userBilling.userBillingName}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="billingAddress">* Addres</label> <input
+                                                type="text" class="form-control" id="billingAddress"
+                                                placeHoder="Address 1" th:name="userBillingStreet1"
+                                                required="required"
+                                                th:value="${userBilling.userBillingStreet1}" /> <input
+                                                type="text" class="form-control" id="billingAddress"
+                                                placeHoder="Address 2" th:name="userBillingStreet2"
+                                                th:value="${userBilling.userBillingStreet2}" />
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="billingCity">* Miasto</label> <input type="text"
+                                                                                                   class="form-control" id="billingCity"
+                                                                                                   placeHoder="Miasto" th:name="userBillingCity"
+                                                                                                   required="required"
+                                                                                                   th:value="${userBilling.userBillingCity}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="billingState">* Województwo (tymczasowo US)</label> <select
+                                                        id="billingState" class="form-control"
+                                                        th:name="userBillingState"
+                                                        th:value="${userBilling.userBillingState}"
+                                                        required="required">
+                                                    <option value="" disabled="disabled">Wybierz województwo</option>
+                                                    <option th:each="state : ${stateList}" th:text="${state}"
+                                                            th:selected="(${userBilling.userBilingState}==${state})"></option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="billingZipcode">* Kod pocztowy</label> <input
+                                                        type="text" class="form-control" id="billingZipcode"
+                                                        placeHoder="Kod pocztowy" th:name="userBillingZipcode"
+                                                        required="required"
+                                                        th:value="${userBilling.userBillingZipcode}" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Credit Card Information -->
+                                        <hr />
+                                        <div class="form-group">
+                                            <h4>Dane karty kredytowej</h4>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <img src="/image/creditcard.png" class="img-responsive" /><br />
+                                                <div class="form-group">
+                                                    <label for="cardType">* Wybierz typ karty kredytowej:</label>
+                                                    <select class="form-controll" id="cardType" th:name="type" th:value="${userPayment.type}">
+                                                        <option value="visa">Visa<option>
+                                                        <option value="mastercard">Mastercard<option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cardHolder">* Właściciel karty:</label>
+                                                    <input type="text" class="form-control" id="cardHolder" required="required"
+                                                           placeHolder = "Dane właściciela karty" th:name="holderName" th:value="${userPayment.holderName}"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="cardNumber">* Numer karty:</label>
+                                                    <div class="input-group">
+                                                        <input type="tel" class="form-control" id="cardNumber" required="required"
+                                                               placeHolder = "Poprawny numer karty kredytowej" th:name="cardNumber" th:value="${userPayment.cardNumber}"/>
+                                                        <span class="input-group-addon"><i class="fa fa-credit-card" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-7">
+                                                <div class="form-group">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-5">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

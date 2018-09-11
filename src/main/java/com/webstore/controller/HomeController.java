@@ -213,7 +213,7 @@ public class HomeController {
         model.addAttribute("userPaymentList", user.getUserPaymentList());
         model.addAttribute("userShippingList", user.getUserShippingList());
         /*model.addAttribute("orderList", user.orderList());*/
-        
+
         model.addAttribute("classActiveBilling", true);
         model.addAttribute("listOfCreditcards", true);
         model.addAttribute("listOfShippingAddresses", true);
