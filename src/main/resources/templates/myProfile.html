@@ -29,10 +29,14 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
-                <li th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1" data-toggle="tab"><span style="color:red;">Edycja konta</span></a></li>
-                <li th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2" data-toggle="tab"><span style="color:red;">Zamówienia</span></a></li>
-                <li th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3" data-toggle="tab"><span style="color:red;">Billingi</span></a></li>
-                <li th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4" data-toggle="tab"><span style="color:red;">Dostawa zamówienia</span></a></li>
+                <li th:classappend="${classActiveEdit}? 'active'"><a href="#tab-1" data-toggle="tab"><span
+                        style="color:red;">Edycja konta</span></a></li>
+                <li th:classappend="${classActiveOrders}? 'active'"><a href="#tab-2" data-toggle="tab"><span
+                        style="color:red;">Zamówienia</span></a></li>
+                <li th:classappend="${classActiveBilling}? 'active'"><a href="#tab-3" data-toggle="tab"><span
+                        style="color:red;">Billingi</span></a></li>
+                <li th:classappend="${classActiveShipping}? 'active'"><a href="#tab-4" data-toggle="tab"><span
+                        style="color:red;">Dostawa zamówienia</span></a></li>
             </ul>
 
             <!-- Tab panels -->
@@ -45,7 +49,6 @@
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
                                 <form th:action="@{/updateUserInfo}" method="post">
-// UWAGA MOŻLIWY ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                     <input type="hidden" name="id" th:value="${user.id}"/>
 
                                     <div class="bg-info" th:if="${updateUserInfo}">User info updated.</div>
@@ -54,30 +57,36 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <label for="firstName">First Name</label>
-                                                <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}"/>
+                                                <input type="text" class="form-control" id="firstName" name="firstName"
+                                                       th:value="${user.firstName}"/>
                                             </div>
                                             <div class="col-xs-6">
                                                 <label for="lastName">Last Name</label>
-                                                <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}"/>
+                                                <input type="text" class="form-control" id="lastName" name="lastName"
+                                                       th:value="${user.lastName}"/>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="userName">User Name</label>
-                                        <input type="text" class="form-control" id="userName" name="username" th:value="${user.username}"/>
+                                        <input type="text" class="form-control" id="userName" name="username"
+                                               th:value="${user.username}"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="currentPassword">Obecna hasło</label>
-                                        <input type="text" class="form-control" id="currentPassword" name="currentPassword" th:value="${currentPassword}"/>
+                                        <input type="text" class="form-control" id="currentPassword"
+                                               name="currentPassword" th:value="${currentPassword}"/>
                                     </div>
 
-                                    <p style="color: #828282">Wpisz swoje obecne hasło jeśli chcesz zmienić hasło lub mail</p>
+                                    <p style="color: #828282">Wpisz swoje obecne hasło jeśli chcesz zmienić hasło lub
+                                        mail</p>
 
                                     <div class="form-group">
                                         <label for="email">Obecny adres mailowy</label>
-                                        <input type="text" class="form-control" id="email" name="email" th:value="${user.email}"/>
+                                        <input type="text" class="form-control" id="email" name="email"
+                                               th:value="${user.email}"/>
                                     </div>
 
                                     <p style="color: #828282">Wprowadź adres mailowy. Ten adres mailowy jest
@@ -87,15 +96,16 @@
 
                                     <div class="form-group">
                                         <label for="txtNewPassword">Hasło</label>
-                                        <input type="text" class="form-control" id="txtNewPassword" name="newPassword" />
+                                        <input type="text" class="form-control" id="txtNewPassword" name="newPassword"/>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="txtConfirmPassword">Powtórz hasło</label>
-                                        <input type="text" class="form-control" id="txtConfirmPassword" />
+                                        <input type="text" class="form-control" id="txtConfirmPassword"/>
                                     </div>
 
-                                    <p style="color: #828282">W celu zmiany hasła, proszę wpisać dwa razy to samo hasło.</p>
+                                    <p style="color: #828282">W celu zmiany hasła, proszę wpisać dwa razy to samo
+                                        hasło.</p>
 
                                     <button type="submit" class="btn btn-primary">Utwórz konto</button>
                                 </form>
@@ -103,11 +113,74 @@
                         </div>
                     </div>
                 </div>
+                <!-- end user information -->
 
+                <!-- Order Information -->
+                <div class="tab-pane fade" id="tab-2"
+                     th:classappend="${classActiveEdit}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end order information -->
+
+                <!-- Billing Information -->
+                <div class="tab-pane fade" id="tab-3"
+                     th:classappend="${classActiveEdit}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">
+                                        <a th:href="@{/listOfCreditCard}" th:style="${listOfCreditCards}? 'color:red'">Lista kart kredytowych</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                        <a th:href="@{/addNewCreditCard}" th:style="${addNewCreditCard}? 'color:red'">Dodaj(Zaktualizuj) kartę kredytową</a>
+                                    </li>
+                                </ol>
+
+                                <div th:if="${listOfCreditCards}">
+                                    <form th:action="@{/setDefaultPayment}" method="post">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Domyślna</th>
+                                                <th>Karta kredytowa</th>
+                                                <th>Opcje</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="userPayment : ${userPaymentlist}">
+                                                <td>
+                                                    <input type="radio" name="defaultUserPaymentId" th:value="${userPayment.id}" th:checked="${userPayment.defaultPayment}" />
+                                                </td>
+                                                <td th:text="${userPayment.cardName}"></td>
+                                                <td>
+                                                    <a th:href="@{/updateCreditCard(id=${userPayment.id})}"><i class="fa fa-pencil"></i></a>
+                                                    <a th:href="@{/removeCreditCard(id=${userPayment.id})}"><i class="fa fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-primary" type="submit">Zapisz</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <!-- /container -->
+    </div>
+</div>
+<!-- /container -->
 
-        <div th:replace="common/footer :: footer"/>
+<div th:replace="common/footer :: footer"/>
 </body>
 </html>

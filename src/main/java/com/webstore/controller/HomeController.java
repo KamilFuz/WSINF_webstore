@@ -163,10 +163,27 @@ public class HomeController {
         return "myAccount";
     }
 
-//    @RequestMapping("/myProfile")
-//    public String myProfile(Model model){
-//        return "index";
-//    }
+    @RequestMapping("/myProfile")
+    public String myProfile(Model model, Principal principal){
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+//        model.addAttribute("userPaymentList", user.getUserPaymentList());
+//        model.addAttribute("userShippingList", user.getShippingPaymentList());
+//        model.addAttribute("orderList", user.getOrderList());
+//        UserShipping userShipping = new UserShipping();
+        model.addAttribute("userShipping", userShipping);
+
+        model.addAttribute("listOfCreditCards", true);
+        model.addAttribute("listOfShippingAddress", true);
+
+        List<String> stateList = USConstants.listOfUSStateCode;
+        Collection.sort(stateList);
+        model.addAttribute("stateList", stateList);
+        model.addAttribute("classActiveEdit", true);
+
+        return "myProfile";
+
+    }
 
     @RequestMapping("/newUser")
     public String newUser (
