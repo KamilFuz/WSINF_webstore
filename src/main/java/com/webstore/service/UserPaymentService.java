@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface UserPaymentService {
 
     Optional<UserPayment> findById(Long id);
+
+    void removeById(Long id);
 }

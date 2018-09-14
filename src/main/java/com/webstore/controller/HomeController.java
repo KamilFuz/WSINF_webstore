@@ -68,14 +68,14 @@ public class HomeController {
     }
 
     @RequestMapping("/storage")
-    public String storage(Model model){
+    public String storage(Model model) {
         List<Product> productList = productService.findAll();
         model.addAttribute("productList", productList);
         return "storage";
     }
 
     @RequestMapping("/forgetPassword")
-    public String forgetPassword (
+    public String forgetPassword(
             HttpServletRequest request,
             @ModelAttribute("email") String email,
 //            @ModelAttribute("username") String username,
@@ -114,13 +114,13 @@ public class HomeController {
         return "myAccount";
     }
 
-    @RequestMapping(value="/newUser", method=RequestMethod.POST)
+    @RequestMapping(value = "/newUser", method = RequestMethod.POST)
     public String newUserPost(
             HttpServletRequest request,
             @ModelAttribute("email") String userEmail,
             @ModelAttribute("username") String username,
             Model model
-    ) throws Exception{
+    ) throws Exception {
         model.addAttribute("classAcitveNewAccount", true);
         model.addAttribute("email", userEmail);
         model.addAttribute("username", username);
@@ -168,7 +168,7 @@ public class HomeController {
     }
 
     @RequestMapping("/myProfile")
-    public String myProfile(Model model, Principal principal){
+    public String myProfile(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
@@ -228,7 +228,7 @@ public class HomeController {
     @RequestMapping("/addNewCreditCard")
     public String addNewCreditCard(
             Model model, Principal principal
-    ){
+    ) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
 
@@ -253,12 +253,12 @@ public class HomeController {
         return "myProfile";
     }
 
-    @RequestMapping(value="/addNewCreditCard", method=RequestMethod.POST)
+    @RequestMapping(value = "/addNewCreditCard", method = RequestMethod.POST)
     public String addNewCreditCard(
             @ModelAttribute("userPayment") UserPayment userPayment,
             @ModelAttribute("userBilling") UserBilling userBilling,
             Principal principal, Model model
-    ){
+    ) {
         User user = userService.findByUsername(principal.getName());
         userService.updateUserBilling(userBilling, userPayment, user);
 
@@ -282,7 +282,7 @@ public class HomeController {
         UserPayment userPayment = userPaymentService.findById(creditCardId)
                 .orElse(null);
 
-        if(user.getId() != userPayment.getUser().getId()) {
+        if (user.getId() != userPayment.getUser().getId()) {
             return "badRequestPage";
         } else {
             model.addAttribute("user", user);
@@ -306,10 +306,58 @@ public class HomeController {
         }
     }
 
+    @RequestMapping("/removeCreditCard")
+    public String removeCreditCard(
+            @ModelAttribute("id") Long creditCardId, Principal principal, Model model
+    ) {
+        User user = userService.findByUsername(principal.getName());
+
+//        UserPayment userPayment = userPaymentService.findById(creditCardId);
+        UserPayment userPayment = userPaymentService.findById(creditCardId)
+                .orElse(null);
+
+        if (user.getId() != userPayment.getUser().getId()) {
+            return "badRequestPage";
+        } else {
+            model.addAttribute("user", user);
+            userPaymentService.removeById(creditCardId);
+
+            model.addAttribute("listOfCreditCards", true);
+            model.addAttribute("classActiveBilling", true);
+            model.addAttribute("listOfShippingAddresses", true);
+
+            model.addAttribute("userPaymentList", user.getUserPaymentList());
+            model.addAttribute("userShippingList", user.getUserShippingList());
+
+            return "myProfile";
+        }
+    }
+
+    @RequestMapping(value = "/setDefaultPayment", method = RequestMethod.POST)
+    public String setDefaultPayment(
+            @ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        userService.setUserDefaultPaymnet(defaultPaymentId, user);
+//        UserPayment userPayment = userPaymentService.findById(creditCardId);
+//        UserPayment userPayment = userPaymentService.findById(creditCardId)
+//                .orElse(null);
+        model.addAttribute("user", user);
+        model.addAttribute("listOfCreditCards", true);
+        model.addAttribute("classActiveBilling", true);
+        model.addAttribute("listOfShippingAddresses", true);
+
+        model.addAttribute("userPaymentList", user.getUserPaymentList());
+        model.addAttribute("userShippingList", user.getUserShippingList());
+
+        return "myProfile";
+
+    }
+
     @RequestMapping("/addNewShippingAddress")
     public String addNewShippingAddress(
             Model model, Principal principal
-    ){
+    ) {
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
 
@@ -332,15 +380,15 @@ public class HomeController {
     }
 
     @RequestMapping("/newUser")
-    public String newUser (
+    public String newUser(
             Locale locale,
             @RequestParam("token") String token,
             Model model) {
         PasswordResetToken passToken = userService.getPasswordResetToken(token);
 
-        if (passToken == null){
+        if (passToken == null) {
             String message = "Invalid Token.";
-            model.addAttribute("message",message);
+            model.addAttribute("message", message);
             return "redirect:/badRequest";
         }
 
@@ -349,7 +397,7 @@ public class HomeController {
 
         UserDetails userDetails = userSecurityService.loadUserByUsername(username);
 
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),userDetails.getAuthorities());
+        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -362,8 +410,8 @@ public class HomeController {
     @RequestMapping("/productDetail")
     public String productDetail(
             @PathParam("id") Long id, Model model, Principal principal
-    ){
-        if(principal != null){
+    ) {
+        if (principal != null) {
             String username = principal.getName();
             User user = userService.findByUsername(username);
             model.addAttribute("user", user);

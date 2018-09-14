@@ -7,12 +7,14 @@ import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 import com.webstore.repository.PasswordResetTokenRepository;
 import com.webstore.repository.RoleRepository;
+import com.webstore.repository.UserPaymentRepository;
 import com.webstore.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -28,6 +30,9 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserPaymentRepository userPaymentRepository;
 
     @Override
     public PasswordResetToken getPasswordResetToken(final String token) {
@@ -81,5 +86,20 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
         userBilling.setUserPayment(userPayment);
         user.getUserPaymentList().add(userPayment);
         save(user);
+    }
+
+    @Override
+    public void setUserDefaultPaymnet(Long userPaymentId, User user){
+        List<UserPayment> userPaymentList = (List<UserPayment>) userPaymentRepository.findAll();
+
+        for (UserPayment userPayment : userPaymentList) {
+            if(userPayment.getId() == userPaymentId) {
+                userPayment.setDefaultPayment(true);
+                userPaymentRepository.save(userPayment);
+            } else {
+                userPayment.setDefaultPayment(false);
+                userPaymentRepository.save(userPayment);
+            }
+        }
     }
 }

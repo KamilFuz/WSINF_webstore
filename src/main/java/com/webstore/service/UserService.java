@@ -22,4 +22,6 @@ public interface UserService {
     User save(User user);
 
     void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
+
+    void setUserDefaultPaymnet(Long userPaymentId, User user);
 }

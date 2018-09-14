@@ -10,10 +10,15 @@ import java.util.Optional;
 
 @Service
 public class UserPaymentServiceImpl implements UserPaymentService {
+
     @Autowired
     private UserPaymentRepository userPaymentRepository;
 
     public Optional<UserPayment> findById(Long id) {
         return userPaymentRepository.findById(id);
+    }
+
+    public void removeById(Long id) {
+        userPaymentRepository.deleteById(id);
     }
 }
