@@ -5,6 +5,7 @@ import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.Role;
 import com.webstore.domain.security.UserRole;
 import com.webstore.service.ProductService;
+import com.webstore.service.UserPaymentService;
 import com.webstore.service.impl.UserSecurityService;
 import com.webstore.service.impl.UserService;
 import com.webstore.utility.MailConstructor;
@@ -46,6 +47,9 @@ public class HomeController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private UserPaymentService userPaymentService;
 
     @RequestMapping("/")
     public String index() {
@@ -266,6 +270,40 @@ public class HomeController {
         model.addAttribute("listOfShippingAddresses", true);
 
         return "myProfile";
+    }
+
+    @RequestMapping("/updateCreditCard")
+    public String updateCreditCard(
+            @ModelAttribute("id") Long creditCardId, Principal principal, Model model
+    ) {
+        User user = userService.findByUsername(principal.getName());
+
+//        UserPayment userPayment = userPaymentService.findById(creditCardId);
+        UserPayment userPayment = userPaymentService.findById(creditCardId)
+                .orElse(null);
+
+        if(user.getId() != userPayment.getUser().getId()) {
+            return "badRequestPage";
+        } else {
+            model.addAttribute("user", user);
+            UserBilling userBilling = userPayment.getUserBilling();
+            model.addAttribute("userPayment", userPayment);
+//            userPaymentService.findById(creditCardId).ifPresent(userPayment -> model.addAttribute("userPayment", userPayment));
+            model.addAttribute("userBilling", userBilling);
+
+            List<String> stateList = USConstants.listOfUSStatesCode;
+            Collections.sort(stateList);
+            model.addAttribute("stateList", stateList);
+
+            model.addAttribute("addNewCreditCard", true);
+            model.addAttribute("classActiveBilling", true);
+            model.addAttribute("listOfShippingAddresses", true);
+
+            model.addAttribute("userPaymentList", user.getUserPaymentList());
+            model.addAttribute("userShippingList", user.getUserShippingList());
+
+            return "myProfile";
+        }
     }
 
     @RequestMapping("/addNewShippingAddress")
