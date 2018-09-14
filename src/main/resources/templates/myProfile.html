@@ -337,6 +337,124 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Shipping Information -->
+                <div class="tab-pane fade" id="tab-4"
+                     th:classappend="${classActiveShipping}? 'in active'">
+                    <div class="panel-group">
+                        <div class="panel panel-default" style="border: none;">
+                            <div class="panel-body"
+                                 style="background-color: #ededed; margin-top: 20px;">
+
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active"><a
+                                            th:href="@{/listOfShippingAddresses}"
+                                            th:style="${listOfShippingAddresses}? 'color:red'">Książka adresowa</a></li>
+                                    <li class="breadcrumb-item active"><a
+                                            th:href="@{/addNewShippingAddress}"
+                                            th:style="${addNewShippingAddress}? 'color:red'">Dodaj (zaktualizuj) adres dostawy</a></li>
+                                </ol>
+
+                                <div th:if="${listOfShippingAddresses}">
+                                    <form th:action="@{/setDefaultShippingAddress}" method="post">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th>Domyślna</th>
+                                                <th>Adres</th>
+                                                <th>Operacje</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="userShipping : ${userShippingList}">
+                                                <td><input type="radio" name="defaultShippingAddressId"
+                                                           th:value="${userShipping.id}"
+                                                           th:checked="${userShipping.userShippingDefault}" /><span>default</span></td>
+                                                <td th:text="${userShipping.userShippingStreet1}+', '+
+														${userShipping.userShippingCity}+', '+${userShipping.userShippingState}"></td>
+                                                <td><a
+                                                        th:href="@{/updateUserShipping(id=${userShipping.id})}"><i
+                                                        class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a
+                                                        th:href="@{/removeUserShipping(id=${userShipping.id})}"><i
+                                                        class="fa fa-times"></i></a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <button class="btn btn-primary" type="submit">Zapisz</button>
+                                    </form>
+                                </div>
+
+                                <div th:if="${addNewShippingAddress}">
+                                    <form th:action="@{/addNewShippingAddress}" method="post">
+                                        <div class="bg-info" th:if="${updateUserShippingInfo}">Informacje zaktualizowano.</div>
+
+                                        <input hidden="hidden" name="id" th:value="${userShipping.id}" />
+
+                                        <!-- Shipping Address -->
+                                        <hr />
+                                        <div class="form-group">
+                                            <h4>Adres dostawy</h4>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shippingName">* Nazwa</label> <input type="text"
+                                                                                            class="form-control" id="shippingName"
+                                                                                            placeholder="Nazwa" th:name="userShippingName"
+                                                                                            required="required"
+                                                                                            th:value="${userShipping.userShippingName}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="shippingAddress">* Ulica 1</label> <input
+                                                type="text" class="form-control" id="shippingAddress"
+                                                placeholder="Ulica 1" th:name="userShippingStreet1"
+                                                required="required"
+                                                th:value="${userShipping.userShippingStreet1}" /> <input
+                                                type="text" class="form-control"
+                                                placeholder="Ulica 2" th:name="userShppingStreet2"
+                                                th:value="${userShipping.userShippingStreet2}" />
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="shippingCity">* Miasto</label> <input type="text"
+                                                                                                    class="form-control" id="shippingCity"
+                                                                                                    placeholder="Miasto" th:name="userShippingCity"
+                                                                                                    required="required"
+                                                                                                    th:value="${userShipping.userShippingCity}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="shippingState">* Województwo</label> <select
+                                                        id="shippingState" class="form-control"
+                                                        th:name="userShippingState"
+                                                        th:value="${userShipping.userShippingState}"
+                                                        required="required">
+                                                    <option value="" disabled="disabled">Wybierz województwo</option>
+                                                    <option th:each="state : ${stateList}" th:text="${state}"
+                                                            th:selected="(${userShipping.userShippingState}==${state})"></option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label for="shippingZipcode">* Kod pocztowy</label> <input
+                                                        type="text" class="form-control" id="shippingZipcode"
+                                                        placeholder="Kod pocztowy"
+                                                        th:name="userShippingZipcode" required="required"
+                                                        th:value="${userShipping.userShippingZipcode}" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr />
+                                        <button type="submit" class="btn btn-primary btn-lg">Zapisz</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
