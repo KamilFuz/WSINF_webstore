@@ -3,6 +3,7 @@ package com.webstore.service.impl;
 import com.webstore.domain.User;
 import com.webstore.domain.UserBilling;
 import com.webstore.domain.UserPayment;
+import com.webstore.domain.UserShipping;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 
@@ -22,6 +23,8 @@ public interface UserService {
     User save(User user);
 
     void updateUserBilling(UserBilling userBilling, UserPayment userPayment, User user);
+
+    void updateUserShipping(UserShipping userShipping, User user);
 
     void setUserDefaultPaymnet(Long userPaymentId, User user);
 }

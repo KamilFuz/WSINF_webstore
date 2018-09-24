@@ -3,6 +3,7 @@ package com.webstore.service.impl;
 import com.webstore.domain.User;
 import com.webstore.domain.UserBilling;
 import com.webstore.domain.UserPayment;
+import com.webstore.domain.UserShipping;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 import com.webstore.repository.PasswordResetTokenRepository;
@@ -101,5 +102,13 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
                 userPaymentRepository.save(userPayment);
             }
         }
+    }
+
+    @Override
+    public void updateUserShipping(UserShipping userShipping, User user){
+        userShipping.setUser(user);
+        userShipping.setUserShippingDefault(true);
+        user.getUserShippingList().add(userShipping);
+        save(user);
     }
 }
