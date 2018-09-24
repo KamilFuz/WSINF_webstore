@@ -26,5 +26,7 @@ public interface UserService {
 
     void updateUserShipping(UserShipping userShipping, User user);
 
-    void setUserDefaultPaymnet(Long userPaymentId, User user);
+    void setUserDefaultPayment(Long userPaymentId, User user);
+
+    void setUserDefaultShipping(Long userShippingId, User user);
 }
