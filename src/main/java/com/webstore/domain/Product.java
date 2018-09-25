@@ -1,8 +1,10 @@
 package com.webstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -34,6 +36,10 @@ public class Product {
 
     @Transient
     private MultipartFile productImage;
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private List<ProductToCartItem> productToCartItemList;
 
     public Long getId() {
         return id;
@@ -113,6 +119,14 @@ public class Product {
 
     public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
+    }
+
+    public List<ProductToCartItem> getProductToCartItemList() {
+        return productToCartItemList;
+    }
+
+    public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
+        this.productToCartItemList = productToCartItemList;
     }
 
     //    public Long getId() {

@@ -3,7 +3,6 @@ package com.webstore.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.awt.print.Book;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,11 +16,11 @@ public class CartItem {
     private BigDecimal subtotal;
 
     @OneToOne
-    private Book book;
+    private Product product;
 
     @OneToMany(mappedBy = "cartItem")
     @JsonIgnore
-    private List<BookToCartItem> bookToCartItemList;
+    private List<ProductToCartItem> productToCartItemList;
 
     @ManyToOne
     @JoinColumn(name="shopping_cart_id")
@@ -55,20 +54,20 @@ public class CartItem {
         this.subtotal = subtotal;
     }
 
-    public Book getBook() {
-        return book;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public List<BookToCartItem> getBookToCartItemList() {
-        return bookToCartItemList;
+    public List<ProductToCartItem> getProductToCartItemList() {
+        return productToCartItemList;
     }
 
-    public void setBookToCartItemList(List<BookToCartItem> bookToCartItemList) {
-        this.bookToCartItemList = bookToCartItemList;
+    public void setProductToCartItemList(List<ProductToCartItem> productToCartItemList) {
+        this.productToCartItemList = productToCartItemList;
     }
 
     public ShoppingCart getShoppingCart() {
