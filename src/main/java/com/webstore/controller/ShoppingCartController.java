@@ -4,6 +4,7 @@ import com.webstore.domain.CartItem;
 import com.webstore.domain.ShoppingCart;
 import com.webstore.domain.User;
 import com.webstore.service.CartItemService;
+import com.webstore.service.ShoppingCartService;
 import com.webstore.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class ShoppingCartController {
 
     @Autowired
     private CartItemService cartItemService;
+
+    @Autowired
+    private ShoppingCartService shoppingCartService;
 
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {

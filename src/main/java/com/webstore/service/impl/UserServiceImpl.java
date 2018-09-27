@@ -1,9 +1,6 @@
 package com.webstore.service.impl;
 
-import com.webstore.domain.User;
-import com.webstore.domain.UserBilling;
-import com.webstore.domain.UserPayment;
-import com.webstore.domain.UserShipping;
+import com.webstore.domain.*;
 import com.webstore.domain.security.PasswordResetToken;
 import com.webstore.domain.security.UserRole;
 import com.webstore.repository.*;
@@ -11,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -56,6 +55,7 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
     }
 
     @Override
+    @Transactional
     public User createUser(User user, Set<UserRole> userRoles) throws Exception{
         User localUser = userRepository.findByUsername(user.getUsername());
 
@@ -67,6 +67,13 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
             }
 
             user.getUserRoles().addAll(userRoles);
+
+            ShoppingCart shoppingCart = new ShoppingCart();
+            shoppingCart.setUser(user);
+            user.setShoppingCart(shoppingCart);
+
+            user.setUserShippingList(new ArrayList<UserShipping>());
+            user.setUserPaymentList(new ArrayList<UserPayment>());
 
             localUser = userRepository.save(user);
         }
