@@ -1,14 +1,14 @@
 package com.webstore.controller;
 
-import com.webstore.domain.CartItem;
-import com.webstore.domain.ShoppingCart;
-import com.webstore.domain.User;
+import com.webstore.domain.*;
 import com.webstore.service.CartItemService;
+import com.webstore.service.ProductService;
 import com.webstore.service.ShoppingCartService;
 import com.webstore.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -27,6 +27,9 @@ public class ShoppingCartController {
     @Autowired
     private ShoppingCartService shoppingCartService;
 
+    @Autowired
+    private ProductService productService;
+
     @RequestMapping("/cart")
     public String shoppingCart(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());
@@ -40,6 +43,26 @@ public class ShoppingCartController {
         model.addAttribute("shoppingCart", shoppingCart);
 
         return "shoppingCart";
+    }
+
+    @RequestMapping("/addItem")
+    public String addItem(
+            @ModelAttribute("product") Product product,
+            @ModelAttribute("qty") String qty,
+            Model model, Principal principal
+    ) {
+        User user = userService.findByUsername(principal.getName());
+        product = productService.findById(product.getId()).orElse(null);
+
+        if (Integer.parseInt(qty) > product.getInStockNumber()) {
+            model.addAttribute("notEnoughStock", true);
+            return "forward:/productDetail?id="+product.getId();
+        }
+
+        CartItem cartItem = cartItemService.addProductToCartItem(product, user, Integer.parseInt(qty));
+        model.addAttribute("addProductSuccess", true);
+
+        return "forward:/productDetail?id="+product.getId();
     }
 
 }
