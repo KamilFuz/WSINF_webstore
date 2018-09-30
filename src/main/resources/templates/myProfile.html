@@ -203,59 +203,31 @@
                                             <h4>Dane do dokumentu sprzedaży</h4>
                                         </div>
                                         <div class="form-group">
-                                            <label for="billingName">* Nazwa</label> <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="billingName"
-                                                                                            placeHoder="Nazwa do dokumentu sprzedaży"
-                                                                                            th:name="userBillingName"
-                                                                                            required="required"
-                                                                                            th:value="${userBilling.userBillingName}"/>
+                                            <label for="billingName">* Nazwa</label> <input type="text" class="form-control" id="billingName" placeHoder="Nazwa do dokumentu sprzedaży" th:name="userBillingName" required="required" th:value="${userBilling.userBillingName}"/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="billingAddress">* Addres</label> <input
-                                                type="text" class="form-control" id="billingAddress"
-                                                placeHoder="Address 1" th:name="userBillingStreet1"
-                                                required="required"
-                                                th:value="${userBilling.userBillingStreet1}"/> <input
-                                                type="text" class="form-control" id="billingAddress"
-                                                placeHoder="Address 2" th:name="userBillingStreet2"
-                                                th:value="${userBilling.userBillingStreet2}"/>
+                                            <label for="billingAddress">* Addres</label> <input type="text" class="form-control" id="billingAddress" placeHoder="Address 1" th:name="userBillingStreet1" required="required" th:value="${userBilling.userBillingStreet1}"/> <input type="text" class="form-control" id="billingAddress" placeHoder="Address 2" th:name="userBillingStreet2" th:value="${userBilling.userBillingStreet2}"/>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-xs-4">
                                                 <div class="form-group">
-                                                    <label for="billingCity">* Miasto</label> <input type="text"
-                                                                                                     class="form-control"
-                                                                                                     id="billingCity"
-                                                                                                     placeHoder="Miasto"
-                                                                                                     th:name="userBillingCity"
-                                                                                                     required="required"
-                                                                                                     th:value="${userBilling.userBillingCity}"/>
+                                                    <label for="billingCity">* Miasto</label> <input type="text" class="form-control" id="billingCity" placeHoder="Miasto" th:name="userBillingCity" required="required" th:value="${userBilling.userBillingCity}"/>
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="form-group">
                                                     <label for="billingState">* Województwo (tymczasowo US)</label>
-                                                    <select
-                                                            id="billingState" class="form-control"
-                                                            th:name="userBillingState"
-                                                            th:value="${userBilling.userBillingState}"
-                                                            required="required">
+                                                    <select id="billingState" class="form-control" th:name="userBillingState" th:value="${userBilling.userBillingState}" required="required">
                                                         <option value="" disabled="disabled">Wybierz województwo
                                                         </option>
-                                                        <option th:each="state : ${stateList}" th:text="${state}"
-                                                                th:selected="(${userBilling.userBillingState}==${state})"></option>
+                                                        <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${userBilling.userBillingState}==${state})"></option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-xs-4">
                                                 <div class="form-group">
-                                                    <label for="billingZipcode">* Kod pocztowy</label> <input
-                                                        type="text" class="form-control" id="billingZipcode"
-                                                        placeHoder="Kod pocztowy" th:name="userBillingZipcode"
-                                                        required="required"
-                                                        th:value="${userBilling.userBillingZipcode}"/>
+                                                    <label for="billingZipcode">* Kod pocztowy</label> <input type="text" class="form-control" id="billingZipcode" placeHoder="Kod pocztowy" th:name="userBillingZipcode" required="required" th:value="${userBilling.userBillingZipcode}"/>
                                                 </div>
                                             </div>
                                         </div>
