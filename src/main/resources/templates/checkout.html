@@ -31,8 +31,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <button type="submit" class="btn btn-warning btn-block">Twoje zamówienie</button>
-                        <p style="font-size:smaller;">Składając zamóienie zgadzasz się z nasza<a href="#">polityką
-                            prywatności</a> i <a href="#">regulaminem</a> naszego sklepu.</p>
+                        <p style="font-size:smaller;">Składając zamóienie zgadzasz się z nasza<a href="#">polityką prywatności</a> i <a href="#">regulaminem</a> naszego sklepu.</p>
                         <hr/>
                         <h3>Podsumowanie zamówienia</h3>
                         <div class="row">
@@ -326,6 +325,95 @@
                     </div>
 
                     <!-- 3. Review Items and Shipping -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#reviewItems"> 3. Review Items and Shipping </a>
+                            </h4>
+                        </div>
+                        <div id="reviewItems" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <h4>Wybierz rodzaj dostawy:</h4>
+                                <div class="radio">
+                                    <label> <input type="radio" name="shippingMethod"
+                                                   value="groundShipping" checked="checked" /> Ground Shipping
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label> <input type="radio" name="shippingMethod"
+                                                   value="premiumShipping" /> Premium Shipping
+                                    </label>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <h4>Produkty</h4>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h4>Cena</h4>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h4>Ilość</h4>
+                                    </div>
+                                </div>
+
+                                <!-- display products in cart -->
+                                <div class="row" th:each="cartItem : ${cartItemList}">
+                                    method="post">
+                                    <hr />
+                                    <div class="col-xs-2">
+                                        <a th:href="@{/productDetail(id=${cartItem.product.id})}"> <img
+                                                class="img-responsive shelf-book"
+                                                th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'.png'"
+                                                style="width: 70px;" />
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-6">
+
+                                        <div style="margin-left:50px;">
+                                            <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.name}"></h4></a>
+                                            <p th:if="${cartItem.product.inStockNumber&gt;10}"
+                                               style="color: green;">Dostępny</p>
+                                            <p
+                                                    th:if="${cartItem.product.inStockNumber&lt;10 and cartItem.product.inStockNumber&gt;0}"
+                                                    style="color: green;">
+                                                Tylko <span th:text="${cartItem.product.inStockNumber}"></span> szt.
+                                            </p>
+                                            <p th:if="${cartItem.product.inStockNumber==0}"
+                                               style="color: darkred;">Produkt niedostępny!</p>
+                                            <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Usuń z koszyka</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <h5 style="color: #db3208; font-size: large;">
+                                            ZŁ<span th:text="${cartItem.product.ourPrice}"
+                                                    th:style="${cartItem.product.inStockNumber}==0? 'text-decoration: line-through' : ''"></span>
+                                        </h5>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <h5 style="font-size: large;" th:text="${cartItem.qty}"></h5>
+                                    </div>
+
+                                </div>
+
+                                <hr />
+                                <hr />
+                                <h4 class="col-xs-12 text-right">
+                                    <strong style="font-size: large;">Suma zamówienia (<span
+                                            th:text="${#lists.size(cartItemList)}"></span> szt):
+                                    </strong> <span style="color: #db3208; font-szie: large;"><span
+                                        th:text="${shoppingCart.grandTotal}"></span> Zł</span>
+                                </h4>
+                                <br />
+                                <br />
+                                <button type="submit" class="btn btn-warning btn-block">Zamów</button>
+                                <p style="font-size:smaller;">Składając zamóienie zgadzasz się z nasza<a href="#">polityką prywatności</a> i <a href="#">regulaminem</a> naszego sklepu.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </form>
