@@ -33,7 +33,7 @@ public class ShoppingCartController {
         ShoppingCart shoppingCart = user.getShoppingCart();
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
-
+//        ---TUTAJ SIĘ KRZACZY, JUŻ NIE---//
         shoppingCartService.updateShoppingCart(shoppingCart);
 
         model.addAttribute("cartItemList", cartItemList);

@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-public class ShoppingCartServiceImpl implements ShoppingCartService {
+public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     @Autowired
     private CartItemService cartItemService;
@@ -21,7 +21,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private ShoppingCartRepository shoppingCartRepository;
 
     public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart) {
-        BigDecimal cartTotal = new BigDecimal(0);
+        BigDecimal cartTotal = new BigDecimal("0");
 
         List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
 
