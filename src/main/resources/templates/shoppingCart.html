@@ -43,7 +43,7 @@
                 <br/><br/>
                 <div class="row">
                     <div class="col-xs-8">
-                        <h4>Produkty</h4>
+                        <h4 style="margin-left:70px;">Produkty</h4>
                     </div>
                     <div class="col-xs-2">
                         <h4>Cena</h4>
@@ -58,19 +58,25 @@
                     <form th:action="@{/shoppingCart/updateCartItem}" method="post">
                         <hr />
                         <div class="col-xs-2">
-                            <a th:href="@{productDetail(id=${cartItem.product.id})}"> <img
-                                    class="img-responsive" th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'.png'" />
+                            <a th:href="@{productDetail(id=${cartItem.product.id})}"> <img style="width:70px;" class="img-responsive shelf-book center-block" th:src="#{adminPath}+@{/image/product/}+${cartItem.product.id}+'.png'" />
                             </a>
-                            <p th:if="${cartItem.product.inStockNumber&gt;10}"
-                               style="color: green;">Na stanie</p>
-                            <p
-                                    th:if="${cartItem.product.inStockNumber&lt;10 and cartItem.product.inStockNumber&gt;0}"
-                                    style="color: green;">
-                                Tylko <span th:text="${cartItem.product.inStockNumber}"></span> na stanie. </p>
-                            <p th:if="${cartItem.product.inStockNumber==0}"
-                               style="color: darkred;">Produkt niedostępny!</p>
                         </div>
+                        <div class="col-xs-6">
 
+                            <div style="margin-left:50px;">
+                                <a th:href="@{/productDetail?id=}+${cartItem.product.id}"><h4 th:text="${cartItem.product.name}"></h4></a>
+                                <p th:if="${cartItem.product.inStockNumber&gt;10}"
+                                   style="color: green;">Dostępny</p>
+                                <p
+                                        th:if="${cartItem.product.inStockNumber&lt;10 and cartItem.product.inStockNumber&gt;0}"
+                                        style="color: green;">
+                                    Tylko <span th:text="${cartItem.product.inStockNumber}"></span> szt.
+                                </p>
+                                <p th:if="${cartItem.product.inStockNumber==0}"
+                                   style="color: darkred;">Produkt niedostępny!</p>
+                                <a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">Usuń z koszyka</a>
+                            </div>
+                        </div>
                         <div class="col-xs-2">
                             <h5 style="color: #db3208; font-size: large;">
                                 ZŁ<span th:text="${cartItem.product.ourPrice}"
