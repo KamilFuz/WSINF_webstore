@@ -58,6 +58,89 @@
 
             <!-- Checkout Info -->
             <div class="col-xs-8">
+                <div th:if=${missingRequiredField}>
+                    <h5 class="alert alert-warning">Pola oznaczone * są wymagane</h5>
+                </div>
+
+                <div class="panel-group" id="accordion">
+
+                    <!-- 1. Shipping Address -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion"
+                                   href="#shippingInfo"> 1. Addres dostawy</a>
+                            </h4>
+                        </div>
+                        <div id="shippingInfo" class="panel-collapse collapse"
+                             th:classappend="${classActiveShipping}? 'in'">
+                            <div class="panel-body">
+                                <table class="table" th:if="${not emptyShippingList}">
+                                    <thead>
+                                    <tr>
+                                        <th>Dostępne adresy</th>
+                                        <th>Operacje</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="userShipping : ${userShippingList}">
+                                        <td
+                                                th:text="${userShipping.userShippingStreet1}+' '+${userShipping.userShippingStreet2}+', '+${userShipping.userShippingCity}
+												+', '+${userShipping.userShippingState}"></td>
+                                        <td><a
+                                                th:href="${/setShippingAddress(userShippingId=${userShipping.id})}">Użyj tego adresu</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <div class="form-group">
+                                    <label for="shippingName">* Imię i nazwisko (nazwa firmy)</label> <input type="text" class="form-control" id="shippingName" placeholder="Imię i nazwisko lub mazwa firmy." name="shippingAddressName" th:value="${shippingAddress.shippingAddressName}" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="shippingStreet">* Ulica 1</label> <input type="text" class="form-control" id="shippingStreet" placeholder="Ulica 1" name="shippingAddressStreet1" th:value="${shippingAddress.shippingAddressStreet1}" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Ulica 2" name="shippingAddressStreet2" th:value="${shippingAddress.shippingAddressStreet2}" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label for="shippingCity">* Miasto</label>
+                                                <input type="text" class="form-control" id="shippingCity" placeholder="Miasto" th:name="shippingAddressCity" required="required" th:value="${shippingAddress.shippingAddressCity}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label for="shippingState">* Województwo</label> <select
+                                                    id="shippingState" class="form-control"
+                                                    th:name="shippingAddressState"
+                                                    th:value="${shippingAddress.shippingAddressState}"
+                                                    required="required">
+                                                <option value="" disabled="disabled">Wybierz województwo</option>
+                                                <option th:each="state : ${stateList}" th:text="${state}"
+                                                        th:selected="(${shippingAddress.shippingAddressState}==${state})"></option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="form-group">
+                                                <label for="shippingZipcode">* Kod pocztowy</label> <input
+                                                    type="text" class="form-control" id="shippingZipcode"
+                                                    placeholder="Kod pocztowy"
+                                                    th:name="shippingAddressZipcode" required="required"
+                                                    th:value="${shippingAddress.shippingAddressZipcode}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a data-toggele="collapse" data-parent="#accordion" class="btn btn-warning pull-right" href="#paymentInfo">Następny krok</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
