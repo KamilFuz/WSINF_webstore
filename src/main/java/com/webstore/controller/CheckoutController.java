@@ -1,9 +1,12 @@
 package com.webstore.controller;
 
 import com.webstore.domain.*;
+import com.webstore.service.BillingAddressService;
 import com.webstore.service.CartItemService;
+import com.webstore.service.PaymentService;
 import com.webstore.service.ShippingAddressService;
 import com.webstore.service.impl.UserService;
+import com.webstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -28,6 +32,12 @@ public class CheckoutController {
 
     @Autowired
     private ShippingAddressService shippingAddressService;
+
+    @Autowired
+    private BillingAddressService billingAddressService;
+
+    @Autowired
+    private PaymentService paymentService;
 
     @RequestMapping("/checkout")
     public String checkout(
@@ -68,9 +78,9 @@ public class CheckoutController {
         }
 
         if (userShippingList.size() == 0) {
-            model.addAttribute("emptyShipingList", true);
+            model.addAttribute("emptyShippingList", true);
         } else {
-            model.addAttribute("emptyShipingList", false);
+            model.addAttribute("emptyShippingList", false);
         }
 
         ShoppingCart shoppingCart = user.getShoppingCart();
@@ -87,5 +97,23 @@ public class CheckoutController {
                 billingAddressService.setByUserBilling(userPayment.getUserBilling(), billingAddress);
             }
         }
+
+        model.addAttribute("shippingAddress", shippingAddress);
+        model.addAttribute("payment", payment);
+        model.addAttribute("billingAddress", billingAddress);
+        model.addAttribute("cartItemList", cartItemList);
+        model.addAttribute("shoppingCart", user.getShoppingCart());
+
+        List<String> stateList = USConstants.listOfUSStatesCode;
+        Collections.sort(stateList);
+        model.addAttribute("stateList", stateList);
+
+        model.addAttribute("classActiveShipping", true);
+
+        if(missingRequiredField) {
+            model.addAttribute("missingRequiredField", true);
+        }
+
+        return "checkout";
     }
 }
