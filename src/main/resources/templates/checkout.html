@@ -296,11 +296,11 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="billingName">* Nazwa</label> <input type="text" class="form-control" id="billingName" placeholder="Nazwa do dokumentu sprzedaży" th:name="billingAddressName" required="required" th:value="${billingAddress.billingAddressName}"/>
+                                    <label for="billingName">* Nazwa</label> <input type="text" class="form-control billingAddress" id="billingName" placeholder="Nazwa do dokumentu sprzedaży" th:name="billingAddressName" required="required" th:value="${billingAddress.billingAddressName}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="billingAddress">* Addres</label> <input type="text" class="form-control" id="billingAddress" placeholder="Address 1" th:name="billingAddressStreet1" required="required" th:value="${billingAddress.billingAddressStreet1}"/>
-                                    <input type="text" class="form-control" id="billingAddress" placeHoder="Address 2"
+                                    <label for="billingAddress">* Addres</label> <input type="text" class="form-control billingAddress" id="billingAddress" placeholder="Address 1" th:name="billingAddressStreet1" required="required" th:value="${billingAddress.billingAddressStreet1}"/>
+                                    <input type="text" class="form-control billingAddress" id="billingAddress" placeHoder="Address 2"
                                            th:name="billingAddressStreet2"
                                            th:value="${billingAddress.billingAddressStreet2}"/>
                                 </div>
@@ -308,13 +308,13 @@
                                 <div class="row">
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <label for="billingCity">* Miasto</label> <input type="text" class="form-control" id="billingCity" placeholder="Miasto" th:name="billingAddressCity" required="required" th:value="${billingAddress.billingAddressCity}"/>
+                                            <label for="billingCity">* Miasto</label> <input type="text" class="form-control billingAddress" id="billingCity" placeholder="Miasto" th:name="billingAddressCity" required="required" th:value="${billingAddress.billingAddressCity}"/>
                                         </div>
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="form-group">
                                             <label for="billingState">* Województwo (tymczasowo US)</label>
-                                            <select id="billingState" class="form-control" th:name="billingAddressState" th:value="${billingAddress.billingAddressState}" required="required">
+                                            <select id="billingState" class="form-control billingAddress" th:name="billingAddressState" th:value="${billingAddress.billingAddressState}" required="required">
                                                 <option value="" disabled="disabled">Wybierz województwo
                                                 </option>
                                                 <option th:each="state : ${stateList}" th:text="${state}" th:selected="(${billingAddress.billingAddressState}==${state})"></option>
@@ -323,7 +323,7 @@
                                     </div>
                                     <div class="col-xs-4">
                                         <div class="form-group">
-                                            <label for="billingZipcode">* Kod pocztowy</label> <input type="text" class="form-control" id="billingZipcode" placeholder="Kod pocztowy" th:name="billingAddressZipcode" required="required" th:value="${billingAddress.billingAddressZipcode}"/>
+                                            <label for="billingZipcode">* Kod pocztowy</label> <input type="text" class="form-control billingAddress" id="billingZipcode" placeholder="Kod pocztowy" th:name="billingAddressZipcode" required="required" th:value="${billingAddress.billingAddressZipcode}"/>
                                         </div>
                                     </div>
                                 </div>
