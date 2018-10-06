@@ -3,6 +3,7 @@ package com.webstore.controller;
 import com.webstore.domain.*;
 import com.webstore.service.*;
 import com.webstore.service.impl.UserService;
+import com.webstore.utility.MailConstructor;
 import com.webstore.utility.USConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,6 +29,9 @@ public class CheckoutController {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
+    private MailConstructor mailConstructor;
 
     @Autowired
     private ShoppingCartService shoppingCartService;
