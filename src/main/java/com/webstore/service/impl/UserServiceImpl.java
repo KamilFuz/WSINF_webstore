@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -132,5 +133,10 @@ public class UserServiceImpl implements com.webstore.service.impl.UserService {
                 userShippingRepository.save(userShipping);
             }
         }
+    }
+
+    @Override
+    public Optional<User> findById(Long id){
+        return userRepository.findById(id);
     }
 }

@@ -14,6 +14,7 @@ public class UserPaymentServiceImpl implements UserPaymentService {
     @Autowired
     private UserPaymentRepository userPaymentRepository;
 
+    @Override
     public Optional<UserPayment> findById(Long id) {
         return userPaymentRepository.findById(id);
     }

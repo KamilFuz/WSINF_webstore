@@ -14,6 +14,7 @@ public class UserShippingServiceImpl implements UserShippingService {
     @Autowired
     private UserShippingRepository userShippingRepository;
 
+    @Override
     public Optional<UserShipping> findById(Long id){
         return userShippingRepository.findById(id);
     }
