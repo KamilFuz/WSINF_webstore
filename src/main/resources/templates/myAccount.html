@@ -27,9 +27,12 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs">
-                <li th:classappend="${classActiveNewAccount}? 'active'"><a href="#tab-1" data-toggle="tab"><span style="color:red;">Załóż nowe konto</span></a></li>
-                <li th:classappend="${classActiveLogin}? 'active'"><a href="#tab-2" data-toggle="tab"><span style="color:red;">Zaloguj</span></a></li>
-                <li th:classappend="${classActiveForgotPassword}? 'active'"><a href="#tab-3" data-toggle="tab"><span style="color:red;">Przypomnienie hasła</span></a></li>
+                <li th:classappend="${classActiveNewAccount}? 'active'"><a href="#tab-1" data-toggle="tab"><span
+                        style="color:red;">Załóż nowe konto</span></a></li>
+                <li th:classappend="${classActiveLogin}? 'active'"><a href="#tab-2" data-toggle="tab"><span
+                        style="color:red;">Zaloguj</span></a></li>
+                <li th:classappend="${classActiveForgotPassword}? 'active'"><a href="#tab-3" data-toggle="tab"><span
+                        style="color:red;">Przypomnienie hasła</span></a></li>
             </ul>
 
             <!-- Tab panels -->
@@ -42,17 +45,20 @@
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
                                 <div class="alert alert-info" th:if="${emailSent}">
-                                    Email z dalszymi instrukcjami został właśnie wysłany. Sprawdź swoją skrzynkę mailową.
+                                    Email z dalszymi instrukcjami został właśnie wysłany. Sprawdź swoją skrzynkę
+                                    mailową.
                                 </div>
                                 <form th:action="@{/newUser}" method="post">
                                     <div class="form-group">
-                                        <label for="newUsername">* Nazwa użytkownika</label></br><span style="color: red" th:if="${usernameExists}">Użytkownik o takiej nazwie istnieje.</span>
+                                        <label for="newUsername">* Nazwa użytkownika</label></br><span
+                                            style="color: red" th:if="${usernameExists}">Użytkownik o takiej nazwie istnieje.</span>
                                         <input required="required" type="text" class="form-control" id="newUsername"
                                                name="username"/>
                                         <p style="color:#828282">Wprowadź nazwę użytkownka</p>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">* Email</label></br><span style="color: red" th:if="${emailExists}">Email o takiej nazwie istnieje.</span>
+                                        <label for="email">* Email</label></br><span style="color: red"
+                                                                                     th:if="${emailExists}">Email o takiej nazwie istnieje.</span>
                                         <input required="required" type="text" class="form-control" id="email"
                                                name="email"/>
                                         <p style="color:#828282">Wprowadź adres mailowy. Ten adres mailowy jest
@@ -74,7 +80,9 @@
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
-                                <div th:if="${param.error != null}" style="color: red">Niepoprawna nazwa użytkownika lub hasło!</div>
+                                <div th:if="${param.error != null}" style="color: red">Niepoprawna nazwa użytkownika lub
+                                    hasło!
+                                </div>
                                 <form th:action="@{/login}" method="post">
                                     <div class="form-group">
                                         <label for="newUsername">* Nazwa użytkownika</label>
@@ -102,8 +110,12 @@
                         <div class="panel panel-default" style="border: none;">
                             <div class="panel-body"
                                  style="background-color: #ededed; margin-top: 20px;">
-                                <div th:if="${emailNotExists}" class="alert alert-danger">Podany email nie istnieje w bazie użytkowników.</div>
-                                <div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email z nowym hasłem został wysłany.</div>
+                                <div th:if="${emailNotExists}" class="alert alert-danger">Podany email nie istnieje w
+                                    bazie użytkowników.
+                                </div>
+                                <div th:if="${forgetPasswordEmailSent}" class="alert alert-success">Email z nowym hasłem
+                                    został wysłany.
+                                </div>
                                 <form th:action="@{/forgetPassword}" method="post">
                                     <div class="form-group">
                                         <label for="recoverEmail">* Email</label>
@@ -119,8 +131,10 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- /container -->
+        </div>
+    </div>
+</div><!-- /container -->
 
-        <div th:replace="common/footer :: footer"/>
+<div th:replace="common/footer :: footer"/>
 </body>
 </html>
