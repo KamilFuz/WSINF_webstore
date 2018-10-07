@@ -7,6 +7,7 @@ import com.webstore.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,6 +39,29 @@ public class SearchController {
         model.addAttribute(classActiveCategory, true);
 
         List<Product> productList = productService.findByCategory(category);
+
+        if (productList.isEmpty()) {
+            model.addAttribute("emptyList", true);
+            return "storage";
+        }
+
+        model.addAttribute("productList", productList);
+
+        return "storage";
+    }
+
+    @RequestMapping("/searchProduct")
+    public String searchProduct(
+            @ModelAttribute("keyword") String keyword,
+            Principal principal, Model model
+    ) {
+        if(principal!=null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+
+        List<Product> productList = productService.blurrySearch(keyword);
 
         if (productList.isEmpty()) {
             model.addAttribute("emptyList", true);

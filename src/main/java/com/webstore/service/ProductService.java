@@ -12,4 +12,6 @@ public interface ProductService {
     Optional<Product> findById(Long id);
 
     List<Product> findByCategory(String category);
+
+    List<Product> blurrySearch(String name);
 }

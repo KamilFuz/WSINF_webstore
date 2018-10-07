@@ -49,4 +49,17 @@ public class ProductServiceImpl implements ProductService {
         }
         return activeProductList;
     }
+
+    public List<Product> blurrySearch(String name) {
+        List<Product> productList = productRepository.findByNameContaining(name);
+        List<Product> activeProductList = new ArrayList<>();
+
+        for (Product product: productList) {
+            if(product.isActive()) {
+                activeProductList.add(product);
+            }
+        }
+
+        return activeProductList;
+    }
 }
