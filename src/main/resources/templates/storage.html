@@ -26,7 +26,19 @@
     <!--</div>-->
     <!--<div class="col-xs-4"></div>-->
     <div class="row" style="margin-top: 120px;">
-        <div class="col-xs-9 col-xs-offset-3">
+        <div class="col-xs-3">
+            <h3><label for="category">Kategorie</label></h3>
+            <div class="list-group" id="category">
+                <a th:href="@{/storage(category='all')}" th:classappend="${activeAll}? 'active'" class="list-group-item">Wszystkie produkty</a>
+                <a th:href="@{/searchByCategory(category='Kamery')}" th:classappend="${activeKamery}? 'active'" class="list-group-item">Kamery</a>
+                <a th:href="@{/searchByCategory(category='Rejestratory')}" th:classappend="${activeRejestratory}? 'active'" class="list-group-item">Rejestratory</a>
+                <a th:href="@{/searchByCategory(category='Akcesoria')}" th:classappend="${activeAkcesoria}? 'active'" class="list-group-item">Akcesoria</a>
+                <a th:href="@{/searchByCategory(category='Domofony')}" th:classappend="${activeDomofony}? 'active'" class="list-group-item">Domofony</a>
+                <a th:href="@{/searchByCategory(category='Noktowizja')}" th:classappend="${activeNoktowizja}? 'active'" class="list-group-item">Noktowizja</a>
+                <a th:href="@{/searchByCategory(category='Uslugi')}" th:classappend="${activeUslugi}? 'active'" class="list-group-item">Usługi</a>
+            </div>
+        </div>
+        <div class="col-xs-9">
             <div th:if="${emptyList}">
                 <h5 style="font-style: italic">Brak produktów! Prosze spróbować później.</h5>
             </div>

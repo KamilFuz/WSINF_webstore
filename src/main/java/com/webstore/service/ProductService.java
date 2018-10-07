@@ -11,4 +11,5 @@ public interface ProductService {
 
     Optional<Product> findById(Long id);
 
+    List<Product> findByCategory(String category);
 }

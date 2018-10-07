@@ -87,9 +87,18 @@ public class HomeController {
     }
 
     @RequestMapping("/storage")
-    public String storage(Model model) {
+    public String storage(Model model, Principal principal) {
+
+        if (principal != null) {
+            String username = principal.getName();
+            User user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+
         List<Product> productList = productService.findAll();
         model.addAttribute("productList", productList);
+        model.addAttribute("activeAll", true);
+
         return "storage";
     }
 
