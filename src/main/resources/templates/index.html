@@ -9,10 +9,10 @@
 
 <!-- Main component for a primary marketing message or call to action -->
 <div class="container">
-    <div class="row">
+    <div class="row banner">
         <!-- Carousel -->
         <div class="col-xs-8">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="margin-top: 20px">
                 <div class="panel-body">
                     <div id="carousel-example-generic" class="carousel slide"
                          data-ride="carousel">
@@ -84,21 +84,21 @@
         <div class="col-xs-4">
             <div clas="panel panel-default">
                 <div class="panel-body">
-                    <img src="/image/best_buy.png" class="img-responsive" />
+                    <a th:href="@{/storage}"><img src="/image/best_buy.png" class="img-responsive" /></a>
                 </div>
             </div>
         </div>
         <div class="col-xs-4">
             <div clas="panel panel-default">
                 <div class="panel-body">
-                    <img src="/image/contact.png" class="img-responsive" />
+                    <a th:href="@{/hours}"><img src="/image/contact.png" class="img-responsive" /></a>
                 </div>
             </div>
         </div>
         <div class="col-xs-4">
             <div clas="panel panel-default">
                 <div class="panel-body">
-                    <img src="/image/faq.png" class="img-responsive" />
+                    <a th:href="@{/faq}"><img src="/image/faq.png" class="img-responsive" /></a>
                 </div>
             </div>
         </div>
@@ -208,5 +208,6 @@
 </div> <!-- /container -->
 
 <div th:replace="common/footer :: footer" />
+<div th:replace="common/footer :: footer-scripts" />
 </body>
 </html>

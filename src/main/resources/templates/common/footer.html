@@ -1,4 +1,65 @@
 <div th:fragment="footer" xmlns:th="http://www.w3.org/1999/xhtml">
+    <br />
+    <br />
+    <footer>
+        <div class="row">
+            <div class="col-xs-3 footerleft">
+                <div class="logofooter">
+                    <a th:href="@{/}"><img class="img-responsive"
+                                           src="/image/logo.png" style="width: 200px;" /></a>
+                </div>
+                <p>
+                    Internetowy sklep z elektroniką. <br />Zadowolenie klientów to nasza pasja.
+                </p>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">KONTAKT</h6>
+                <ul class="post">
+                    <p>
+                        <i class="fa fa-map-pin"></i>Warszawska 1<br /> 09-400 Płock
+                    </p>
+                    <p>
+                        <i class="fa fa-phone"></i> Tel: 24 222 22 22 Kom: 555 555 555
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope"></i> E-mail : info@websotre.com
+                    </p>
+                </ul>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">Linki</h6>
+                <ul class="footer-ul">
+                    <li><a href="#"> Polityka prywatności</a></li>
+                    <li><a href="#"> Regulamin</a></li>
+                    <li><a href="#"> FAQ</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3 paddingtop-bottom">
+                <h6 class="heading7">Godziny otwarcia</h6>
+                <div class="post">
+                    <p>Poniedziałek - Sobota: 8:00 - 18:00</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <div class="col-md-6">
+            <p>© 2018 - All Rights Reserved</p>
+        </div>
+        <div class="col-md-6">
+            <ul class="bottom_ul">
+                <li><a href="#">O nas</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="#">Mapa strony</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer-scripts" xmlns:th="http://www.w3.org/1999/xhtml">
     <!-- Bootstrap core JavaScript
     ================================================== -->
 

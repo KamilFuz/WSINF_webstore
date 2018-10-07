@@ -68,7 +68,10 @@
         </div>
     </div>
 </div><!-- /container -->
-<div th:replace="common/footer :: footer"/>
+
+<div th:replace="common/footer :: footer" />
+<div th:replace="common/footer :: footer-scripts"/>
+
 <script>
     $(document).ready(function () {
         $('#productList').DataTable({

@@ -40,7 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login",
             "/fonts/**",
             "/storage",
-            "/productDetail/**"
+            "/productDetail/**",
+            "/hours",
+            "/faq"
     };
 
     @Override
