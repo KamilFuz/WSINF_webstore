@@ -9,7 +9,7 @@ import com.webstore.service.impl.UserSecurityService;
 import com.webstore.service.impl.UserService;
 import com.webstore.utility.MailConstructor;
 import com.webstore.utility.SecurityUtility;
-import com.webstore.utility.USConstants;
+import com.webstore.utility.PLConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -210,7 +210,7 @@ public class HomeController {
         model.addAttribute("listOfCreditCards", true);
         model.addAttribute("listOfShippingAddresses", true);
 
-        List<String> stateList = USConstants.listOfUSStatesCode;
+        List<String> stateList = PLConstants.listOfPLStatesCode;
         Collections.sort(stateList);
         model.addAttribute("stateList", stateList);
         model.addAttribute("classActiveEdit", true);
@@ -272,7 +272,7 @@ public class HomeController {
         model.addAttribute("userBilling", userBilling);
         model.addAttribute("userPayment", userPayment);
 
-        List<String> stateList = USConstants.listOfUSStatesCode;
+        List<String> stateList = PLConstants.listOfPLStatesCode;
         Collections.sort(stateList);
         model.addAttribute("stateList", stateList);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
@@ -321,7 +321,7 @@ public class HomeController {
 //            userPaymentService.findById(creditCardId).ifPresent(userPayment -> model.addAttribute("userPayment", userPayment));
             model.addAttribute("userBilling", userBilling);
 
-            List<String> stateList = USConstants.listOfUSStatesCode;
+            List<String> stateList = PLConstants.listOfPLStatesCode;
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 
@@ -402,7 +402,7 @@ public class HomeController {
 
         model.addAttribute("userShipping", userShipping);
 
-        List<String> stateList = USConstants.listOfUSStatesCode;
+        List<String> stateList = PLConstants.listOfPLStatesCode;
         Collections.sort(stateList);
         model.addAttribute("stateList", stateList);
         model.addAttribute("userPaymentList", user.getUserPaymentList());
@@ -446,7 +446,7 @@ public class HomeController {
 
             model.addAttribute("userShipping", userShipping);
 
-            List<String> stateList = USConstants.listOfUSStatesCode;
+            List<String> stateList = PLConstants.listOfPLStatesCode;
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 
@@ -654,7 +654,7 @@ public class HomeController {
             UserShipping userShipping = new UserShipping();
             model.addAttribute("userShipping", userShipping);
 
-            List<String> stateList = USConstants.listOfUSStatesCode;
+            List<String> stateList = PLConstants.listOfPLStatesCode;
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 

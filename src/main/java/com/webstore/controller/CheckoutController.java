@@ -4,7 +4,7 @@ import com.webstore.domain.*;
 import com.webstore.service.*;
 import com.webstore.service.impl.UserService;
 import com.webstore.utility.MailConstructor;
-import com.webstore.utility.USConstants;
+import com.webstore.utility.PLConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -125,7 +125,7 @@ public class CheckoutController {
         model.addAttribute("cartItemList", cartItemList);
         model.addAttribute("shoppingCart", user.getShoppingCart());
 
-        List<String> stateList = USConstants.listOfUSStatesCode;
+        List<String> stateList = PLConstants.listOfPLStatesCode;
         Collections.sort(stateList);
         model.addAttribute("stateList", stateList);
 
@@ -214,7 +214,7 @@ public class CheckoutController {
             model.addAttribute("cartItemList", cartItemList);
             model.addAttribute("shoppingCart", user.getShoppingCart());
 
-            List<String> stateList = USConstants.listOfUSStatesCode;
+            List<String> stateList = PLConstants.listOfPLStatesCode;
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 
@@ -267,7 +267,7 @@ public class CheckoutController {
             model.addAttribute("cartItemList", cartItemList);
             model.addAttribute("shoppingCart", user.getShoppingCart());
 
-            List<String> stateList = USConstants.listOfUSStatesCode;
+            List<String> stateList = PLConstants.listOfPLStatesCode;
             Collections.sort(stateList);
             model.addAttribute("stateList", stateList);
 
