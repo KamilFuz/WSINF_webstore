@@ -23,14 +23,6 @@ public class Product {
     private double ourPrice;
     private double shippingWeight;
 
-    public double getShippingWeight() {
-        return shippingWeight;
-    }
-
-    public void setShippingWeight(double shippingWeight) {
-        this.shippingWeight = shippingWeight;
-    }
-
     private boolean active=true;
     private int inStockNumber;
 
@@ -95,6 +87,14 @@ public class Product {
 
     public void setOurPrice(double ourPrice) {
         this.ourPrice = ourPrice;
+    }
+
+    public double getShippingWeight() {
+        return shippingWeight;
+    }
+
+    public void setShippingWeight(double shippingWeight) {
+        this.shippingWeight = shippingWeight;
     }
 
     public boolean isActive() {
